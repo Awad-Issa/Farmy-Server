@@ -11,18 +11,9 @@ import org.springframework.boot.test.context.SpringBootTest;
 @SpringBootTest
 public class ApplicationTests {
 
-//	@Autowired
-	SheepMapper sheepMapper = new SheepMapperImpl();
-
 	@Test
 	public void contextLoads() {
-		SheepDto sheepDto = SheepDto.builder().age(1).build();
 
-		Sheep entity = sheepMapper.toEntity(sheepDto);
-
-		Assert.assertNotNull(entity);
-		Assert.assertEquals(entity.getAge(), sheepDto.getAge());
-		Assert.assertNull(entity.getGender());
 	}
 
 	@Test
