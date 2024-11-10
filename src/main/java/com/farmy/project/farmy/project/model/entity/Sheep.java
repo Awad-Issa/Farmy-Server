@@ -21,8 +21,8 @@ public class Sheep extends BaseEntity {
     @Column(name = "age")
     private int age;  // Age in months
 
-    @Column(name = "gender")
-    private String gender;
+    @Column(name = "gender", nullable = false)
+    protected Gender gender;
 
     @Column(name = "birth_day")
     private LocalDate birthDay;
@@ -41,4 +41,7 @@ public class Sheep extends BaseEntity {
     @JoinColumn(name = "father_id")
     private Sheep father;
 
+    protected Sheep(Gender gender) {
+        this.gender = gender;
+    }
 }

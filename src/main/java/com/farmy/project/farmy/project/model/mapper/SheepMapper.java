@@ -7,6 +7,7 @@ import org.mapstruct.Mapper;
 @Mapper(componentModel = "spring")
 public interface SheepMapper {
 
+
     SheepDto toDto(Sheep sheep);
 
     Sheep toEntity(SheepDto sheepDto);

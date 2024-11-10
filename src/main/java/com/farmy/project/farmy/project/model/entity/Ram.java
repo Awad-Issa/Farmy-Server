@@ -5,11 +5,14 @@ import jakarta.persistence.Entity;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 
-@AllArgsConstructor
 @Data
 @Entity
 @DiscriminatorValue("RAM")
 public class Ram extends Sheep {
+
+    public Ram() {
+        super(Gender.MALE); // Set gender to MALE
+    }
 
 
 }

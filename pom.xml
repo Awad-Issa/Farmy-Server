@@ -77,10 +77,11 @@
         </dependency>
 
         <!-- flyway for DB Migration  -->
-          <dependency>
-              <groupId>org.flywaydb</groupId>
-              <artifactId>flyway-core</artifactId>
-          </dependency>
+        <dependency>
+            <groupId>org.flywaydb</groupId>
+            <artifactId>flyway-core</artifactId>
+            <version>10.10.0</version> <!-- Or whatever the latest supported version is -->
+        </dependency>
 
 
     </dependencies>
