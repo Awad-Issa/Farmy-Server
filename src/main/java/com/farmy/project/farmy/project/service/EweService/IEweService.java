@@ -1,20 +1,21 @@
+
 package com.farmy.project.farmy.project.service.EweService;
 
+import com.farmy.project.farmy.project.dto.EweDto;
 import com.farmy.project.farmy.project.model.entity.Ewe;
 
 import java.util.List;
 
 public interface IEweService {
 
-    List<Ewe> getAllEwes();
 
-    Ewe addNewEwe(Ewe ewe);
+    List<EweDto> getAllEwes();
 
-    Ewe removeEwe(long id);
+    void addNewEwe(EweDto eweDto);
 
-    Ewe editEwe(Ewe ewe, long id);
+    EweDto editEwe(long id, EweDto eweDto);
 
-    Ewe getEweById(long id);
+    EweDto removeEwe(long id);
 
-    Ewe editEwe(long id, Ewe ewe);
+    EweDto getEweById(long id);
 }

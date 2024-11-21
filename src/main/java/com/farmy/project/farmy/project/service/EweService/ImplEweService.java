@@ -1,13 +1,20 @@
+
 package com.farmy.project.farmy.project.service.EweService;
 
 
+import com.farmy.project.farmy.project.dto.EweDto;
 import com.farmy.project.farmy.project.model.entity.Ewe;
+import com.farmy.project.farmy.project.model.entity.Gender;
+import com.farmy.project.farmy.project.model.mapper.SheepMapper;
 import com.farmy.project.farmy.project.model.repository.EweRepo;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+
 import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @RequiredArgsConstructor
 @Service
@@ -15,49 +22,79 @@ public class ImplEweService implements IEweService {
 
     private final EweRepo eweRepo;
 
+    private final SheepMapper sheepMapper;
+
+
     @Override
-    public List<Ewe> getAllEwes(){
-        return eweRepo.findAll();
+    public List<EweDto> getAllEwes() {
+        return eweRepo
+                .findAll()
+                .stream()
+                .map(sheepMapper::toEweDto)
+                .collect(Collectors.toList());
     }
 
     @Override
-    public Ewe addNewEwe(Ewe ewe){
-        return eweRepo.save(ewe);
+    public void addNewEwe(EweDto eweDto) {
+        Ewe ewe = new Ewe();
+        ewe.setNum(eweDto.getNum());
+        ewe.setAge(eweDto.getAge());
+        ewe.setWeight(eweDto.getWeight());
+        ewe.setBirthDay(eweDto.getBirthDay());
+
+        if (eweDto.getGender() == null) {
+            ewe.setGender(Gender.valueOf("FEMALE"));
+        } else {
+            ewe.setGender(Gender.valueOf(eweDto.getGender()));
+        }
+
+        eweRepo.save(ewe);
     }
 
     @Override
-    public Ewe removeEwe(long id){
+    public EweDto removeEwe(long id) {
         Optional<Ewe> ewe = eweRepo.findById(id);
-        if(ewe.isPresent()){
+        if (ewe.isPresent()) {
             eweRepo.delete(ewe.get());
-            return ewe.get();
+            return sheepMapper.toEweDto(ewe.get());
         }
         return null;
     }
 
-    @Override
-    public Ewe editEwe(Ewe ewe, long id) {
-        return null;
-    }
+
 
     @Override
-    public Ewe editEwe(long id, Ewe ewe){
+    public EweDto editEwe(long id, EweDto eweDto) {
         Optional<Ewe> existingEwe = eweRepo.findById(id);
-        if ((existingEwe.isPresent())){
-            Ewe updateEwe = existingEwe.get();
-            updateEwe.setNum(ewe.getNum());
-            updateEwe.setAge(ewe.getAge());
-            updateEwe.setGender(ewe.getGender());
-            updateEwe.setBirthDay(ewe.getBirthDay());
-            updateEwe.setWeight(ewe.getWeight());
-            return eweRepo.save(updateEwe);
+
+        if (existingEwe.isPresent()) {
+            Ewe ewe = existingEwe.get();
+
+            ewe.setNum(eweDto.getNum());
+            ewe.setAge(eweDto.getAge());
+            ewe.setBirthDay(eweDto.getBirthDay());
+            ewe.setWeight(eweDto.getWeight());
+
+            Ewe updatedEwe = eweRepo.save(ewe);
+
+            return EweDto.builder()
+                    .num(updatedEwe.getNum())
+                    .age(updatedEwe.getAge())
+                    .birthDay(updatedEwe.getBirthDay())
+                    .weight(updatedEwe.getWeight())
+                    .build();
         }
-        return null;
+
+        throw new NoSuchElementException("Ewe not found with id: " + id);
     }
 
+
+
     @Override
-    public Ewe getEweById(long id){
-        return eweRepo.findById(id).orElse(null);
+    public EweDto getEweById(long id) {
+        return eweRepo.findById(id)
+                .map(sheepMapper::toEweDto)
+                .orElse(null);
     }
 
 }

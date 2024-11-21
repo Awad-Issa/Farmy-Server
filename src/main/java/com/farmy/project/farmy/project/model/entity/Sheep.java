@@ -1,9 +1,12 @@
 package com.farmy.project.farmy.project.model.entity;
 
 import jakarta.persistence.*;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
 import java.time.LocalDate;
-import java.util.List;
 
 @Builder
 @Data
@@ -30,8 +33,8 @@ public class Sheep extends BaseEntity {
     @Column(name = "weight")
     private double weight;
 
-    @OneToMany(mappedBy = "mother", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private List<Sheep> offspring;
+//    @OneToMany(mappedBy = "mother", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+//    private List<Sheep> offspring;
 
     @ManyToOne
     @JoinColumn(name = "mother_id")

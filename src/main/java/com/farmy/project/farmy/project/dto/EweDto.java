@@ -1,12 +1,22 @@
 package com.farmy.project.farmy.project.dto;
 
-import com.farmy.project.farmy.project.model.entity.Ewe;
+import com.farmy.project.farmy.project.model.entity.Gender;
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
+import lombok.experimental.SuperBuilder;
 
 
-@Builder
+
+@SuperBuilder
 @Data
-public class EweDto {
+
+public class EweDto extends SheepDto {
+
+    public EweDto(){
+        setGender(String.valueOf(Gender.FEMALE));
+    }
+
 
 }
