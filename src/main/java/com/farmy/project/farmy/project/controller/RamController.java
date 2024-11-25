@@ -18,21 +18,21 @@ public class RamController {
     private final ImplRamService implRamService;
 
     @PostMapping("/addNewRam")
-    public ResponseEntity<String> addNewRam(@Valid @RequestBody RamDto ramDto){
+    public ResponseEntity<String> addNewRam(@Valid @RequestBody RamDto ramDto) {
         implRamService.addNewRam(ramDto);
         return ResponseEntity.ok("Ram created successfully");
     }
 
     @GetMapping("/getAllRams")
-    public List<RamDto> getAllRams(){
+    public List<RamDto> getAllRams() {
         return implRamService.getAllRams();
     }
 
     @DeleteMapping("/removeRam/{id}")
-    public ResponseEntity<RamDto> removeRam(@PathVariable long id){
+    public ResponseEntity<RamDto> removeRam(@PathVariable long id) {
         RamDto removedRam = implRamService.removeRam(id);
 
-        if (removedRam != null){
+        if (removedRam != null) {
             return ResponseEntity.ok(removedRam);
         }
         return ResponseEntity.notFound().build();
@@ -40,24 +40,23 @@ public class RamController {
     }
 
     @GetMapping("/getRamById/{id}")
-    public ResponseEntity<RamDto> getRamById(@PathVariable Long id){
+    public ResponseEntity<RamDto> getRamById(@PathVariable Long id) {
         RamDto ramDto = implRamService.getRamById(id);
-        if (ramDto == null){
+        if (ramDto == null) {
             return ResponseEntity.notFound().build();
         }
         return ResponseEntity.ok(ramDto);
     }
 
     @PutMapping("/editRam/{id}")
-    public  ResponseEntity<RamDto> editRam(@PathVariable long id, @RequestBody RamDto ramDto){
+    public ResponseEntity<RamDto> editRam(@PathVariable long id, @RequestBody RamDto ramDto) {
 
         RamDto updatedRam = implRamService.editRam(id, ramDto);
 
-        if (updatedRam != null){
+        if (updatedRam != null) {
             return ResponseEntity.ok(updatedRam);
-        }
-        else {
-            return  ResponseEntity.status(HttpStatus.NOT_FOUND)
+        } else {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND)
                     .body(null);
         }
     }

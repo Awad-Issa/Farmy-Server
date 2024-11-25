@@ -16,23 +16,23 @@ import java.util.stream.Collectors;
 
 @RequiredArgsConstructor
 @Service
-public class ImplLambService implements ILambService{
+public class ImplLambService implements ILambService {
 
     private final LambRepo lambRepo;
 
     private final SheepMapper sheepMapper;
 
     @Override
-    public List<LambDto> getAllLambs(){
+    public List<LambDto> getAllLambs() {
         return lambRepo
                 .findAll()
                 .stream()
-                .map(sheepMapper :: toLambDto)
+                .map(sheepMapper::toLambDto)
                 .collect(Collectors.toList());
     }
 
     @Override
-    public void addNewLamb(LambDto lambDto){
+    public void addNewLamb(LambDto lambDto) {
         Lamb lamb = new Lamb();
         lamb.setNum(lambDto.getNum());
         lamb.setAge(lambDto.getAge());
@@ -45,9 +45,9 @@ public class ImplLambService implements ILambService{
 
 
     @Override
-    public LambDto removeLamb(long id){
+    public LambDto removeLamb(long id) {
         Optional<Lamb> lamb = lambRepo.findById(id);
-        if (lamb.isPresent()){
+        if (lamb.isPresent()) {
             lambRepo.delete(lamb.get());
             return sheepMapper.toLambDto(lamb.get());
         }
@@ -56,11 +56,11 @@ public class ImplLambService implements ILambService{
 
 
     @Override
-    public LambDto editLamb(long id, LambDto lambDto){
+    public LambDto editLamb(long id, LambDto lambDto) {
 
         Optional<Lamb> exisitingLamb = lambRepo.findById(id);
 
-        if (exisitingLamb.isPresent()){
+        if (exisitingLamb.isPresent()) {
             Lamb lamb = exisitingLamb.get();
 
             lamb.setNum(lambDto.getNum());
@@ -84,14 +84,11 @@ public class ImplLambService implements ILambService{
     }
 
     @Override
-    public LambDto getLambById(long id){
+    public LambDto getLambById(long id) {
         return lambRepo.findById(id)
-                .map(sheepMapper :: toLambDto)
+                .map(sheepMapper::toLambDto)
                 .orElse(null);
     }
-
-
-
 
 
 }

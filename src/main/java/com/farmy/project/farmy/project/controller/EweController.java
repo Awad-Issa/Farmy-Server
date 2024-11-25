@@ -1,7 +1,6 @@
 package com.farmy.project.farmy.project.controller;
 
 import com.farmy.project.farmy.project.dto.EweDto;
-import com.farmy.project.farmy.project.model.entity.Ewe;
 import com.farmy.project.farmy.project.service.EweService.ImplEweService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -18,7 +17,7 @@ public class EweController {
     private final ImplEweService implEweService;
 
     @PostMapping("/addNewEwe")
-    public ResponseEntity<String> addNewEwe(@Valid @RequestBody EweDto eweDto){
+    public ResponseEntity<String> addNewEwe(@Valid @RequestBody EweDto eweDto) {
         implEweService.addNewEwe(eweDto);
         return ResponseEntity.ok("Ewe created successfully");
     }
@@ -55,8 +54,7 @@ public class EweController {
         if (updatedEwe != null) {
             return ResponseEntity.ok(updatedEwe);
         } else {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND)
-                    .body(null);
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
         }
     }
 

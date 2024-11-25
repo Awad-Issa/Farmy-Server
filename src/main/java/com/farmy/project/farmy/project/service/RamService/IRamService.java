@@ -2,7 +2,6 @@
 package com.farmy.project.farmy.project.service.RamService;
 
 import com.farmy.project.farmy.project.dto.RamDto;
-import com.farmy.project.farmy.project.model.entity.Ram;
 
 import java.util.List;
 

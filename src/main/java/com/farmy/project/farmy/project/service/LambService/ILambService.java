@@ -1,7 +1,6 @@
 package com.farmy.project.farmy.project.service.LambService;
 
 import com.farmy.project.farmy.project.dto.LambDto;
-import com.farmy.project.farmy.project.model.entity.Lamb;
 
 import java.util.List;
 

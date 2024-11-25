@@ -2,7 +2,6 @@
 package com.farmy.project.farmy.project.service.EweService;
 
 import com.farmy.project.farmy.project.dto.EweDto;
-import com.farmy.project.farmy.project.model.entity.Ewe;
 
 import java.util.List;
 

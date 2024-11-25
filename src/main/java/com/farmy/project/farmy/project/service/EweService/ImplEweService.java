@@ -10,7 +10,6 @@ import com.farmy.project.farmy.project.model.repository.EweRepo;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
-
 import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Optional;
