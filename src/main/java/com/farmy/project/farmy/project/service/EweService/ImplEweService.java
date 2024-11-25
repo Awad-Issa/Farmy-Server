@@ -62,7 +62,6 @@ public class ImplEweService implements IEweService {
     }
 
 
-
     @Override
     public EweDto editEwe(long id, EweDto eweDto) {
         Optional<Ewe> existingEwe = eweRepo.findById(id);
@@ -74,6 +73,7 @@ public class ImplEweService implements IEweService {
             ewe.setAge(eweDto.getAge());
             ewe.setBirthDay(eweDto.getBirthDay());
             ewe.setWeight(eweDto.getWeight());
+            ewe.setGender(Gender.FEMALE);
 
             Ewe updatedEwe = eweRepo.save(ewe);
 
@@ -82,12 +82,12 @@ public class ImplEweService implements IEweService {
                     .age(updatedEwe.getAge())
                     .birthDay(updatedEwe.getBirthDay())
                     .weight(updatedEwe.getWeight())
+                    .gender(String.valueOf(Gender.FEMALE))
                     .build();
         }
 
         throw new NoSuchElementException("Ewe not found with id: " + id);
     }
-
 
 
     @Override

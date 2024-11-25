@@ -8,17 +8,15 @@ import java.util.List;
 
 public interface IRamService {
 
-//    List<RamDto> getAllRams();
+    List<RamDto> getAllRams();
 
-    Ram addNewRam(Ram ram);
+    void addNewRam(RamDto ram);
 
-//    RamDto removeRam(long id);
-//
-//    RamDto editRam(Ram ram, long id);
-//
-//    RamDto getRamById(long id);
-//
-//    RamDto editRam(long id, Ram ram);
-//
+    RamDto removeRam(long id);
+
+    RamDto editRam(long id, RamDto ramDto);
+
+    RamDto getRamById(long id);
+
 
 }
