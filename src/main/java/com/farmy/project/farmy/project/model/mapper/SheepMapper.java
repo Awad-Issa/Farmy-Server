@@ -1,8 +1,10 @@
 package com.farmy.project.farmy.project.model.mapper;
 
 import com.farmy.project.farmy.project.dto.EweDto;
+import com.farmy.project.farmy.project.dto.LambDto;
 import com.farmy.project.farmy.project.dto.RamDto;
 import com.farmy.project.farmy.project.model.entity.Ewe;
+import com.farmy.project.farmy.project.model.entity.Lamb;
 import com.farmy.project.farmy.project.model.entity.Ram;
 import com.farmy.project.farmy.project.model.entity.Sheep;
 import org.mapstruct.Mapper;
@@ -11,11 +13,6 @@ import org.mapstruct.Mapper;
 public interface SheepMapper {
 
 
-
-//    SheepDto toDto(Sheep sheep);
-//
-//    Sheep toEntity(SheepDto sheepDto);
-
     EweDto toEweDto(Ewe ewe);
 
     Sheep toEweEntity(EweDto eweDto);
@@ -23,6 +20,12 @@ public interface SheepMapper {
     RamDto toRamDto (Ram ram);
 
     Sheep toRamEntity(RamDto ramDto);
+
+    LambDto toLambDto(Lamb lamb);
+
+    Sheep toLambEntity(LambDto lambDto);
+
+
 
 
 }

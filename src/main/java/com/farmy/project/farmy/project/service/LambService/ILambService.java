@@ -7,14 +7,14 @@ import java.util.List;
 
 public interface ILambService {
 
-//    List<LambDto> getAllLambs();
+    List<LambDto> getAllLambs();
 
-    Lamb addNewLamb(Lamb lamb);
+    void addNewLamb(LambDto lambDto);
 
-//    LambDto removeLamb(long id);
-//
-//    LambDto editLamb(long id, Lamb lamb);
-//
-//    LambDto getLambById(long id);
+    LambDto removeLamb(long id);
+
+    LambDto editLamb(long id, LambDto lambDto);
+
+    LambDto getLambById(long id);
 
 }
