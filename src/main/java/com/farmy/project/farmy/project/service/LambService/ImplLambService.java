@@ -4,6 +4,7 @@ package com.farmy.project.farmy.project.service.LambService;
 import com.farmy.project.farmy.project.dto.LambDto;
 import com.farmy.project.farmy.project.model.entity.Gender;
 import com.farmy.project.farmy.project.model.entity.Lamb;
+import com.farmy.project.farmy.project.model.entity.Status;
 import com.farmy.project.farmy.project.model.mapper.SheepMapper;
 import com.farmy.project.farmy.project.model.repository.LambRepo;
 import lombok.RequiredArgsConstructor;
@@ -34,10 +35,12 @@ public class ImplLambService implements ILambService {
     @Override
     public void addNewLamb(LambDto lambDto) {
         Lamb lamb = new Lamb();
+
         lamb.setNum(lambDto.getNum());
         lamb.setAge(lambDto.getAge());
         lamb.setWeight(lambDto.getWeight());
-        lamb.setBirthDay(lambDto.getBirthDay());
+        lamb.setBirthDate(lambDto.getBirthDate());
+        lamb.setStatus(Status.valueOf(lambDto.getStatus()));
         lamb.setGender(Gender.valueOf(lambDto.getGender()));
 
         lambRepo.save(lamb);
@@ -64,19 +67,20 @@ public class ImplLambService implements ILambService {
             Lamb lamb = exisitingLamb.get();
 
             lamb.setNum(lambDto.getNum());
-            lamb.setAge(lambDto.getAge());
             lamb.setWeight(lambDto.getWeight());
-            lamb.setBirthDay(lambDto.getBirthDay());
+            lamb.setBirthDate(lambDto.getBirthDate());
             lamb.setGender(Gender.valueOf(lambDto.getGender()));
+            lamb.setStatus(Status.valueOf(lambDto.getStatus()));
 
             Lamb updatedLamb = lambRepo.save(lamb);
 
             return LambDto.builder()
                     .num(updatedLamb.getNum())
                     .age(updatedLamb.getAge())
-                    .birthDay(updatedLamb.getBirthDay())
+                    .birthDate(updatedLamb.getBirthDate())
                     .weight(updatedLamb.getWeight())
                     .gender(String.valueOf(updatedLamb.getGender()))
+                    .status(String.valueOf(updatedLamb.getStatus()))
                     .build();
         }
         throw new NoSuchElementException("Lamb not found with id: " + id);

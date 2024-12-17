@@ -19,7 +19,7 @@ public class LambController {
     @PostMapping("/addNewLamb")
     public ResponseEntity<String> addNewLamb(@Valid @RequestBody LambDto lambDto) {
         implLambService.addNewLamb(lambDto);
-        return ResponseEntity.ok("Lamb created successfully");
+        return ResponseEntity.ok("Lamb created successfully"+ " "+lambDto.getStatus());
     }
 
     @GetMapping("/getAllLambs")
@@ -43,6 +43,7 @@ public class LambController {
         if (lambDto == null) {
             return ResponseEntity.notFound().build();
         }
+//        System.out.printf(lambDto.getType());
         return ResponseEntity.ok(lambDto);
     }
 

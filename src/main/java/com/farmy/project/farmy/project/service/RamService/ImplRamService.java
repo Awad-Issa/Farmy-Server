@@ -4,6 +4,7 @@ package com.farmy.project.farmy.project.service.RamService;
 import com.farmy.project.farmy.project.dto.RamDto;
 import com.farmy.project.farmy.project.model.entity.Gender;
 import com.farmy.project.farmy.project.model.entity.Ram;
+import com.farmy.project.farmy.project.model.entity.Status;
 import com.farmy.project.farmy.project.model.mapper.SheepMapper;
 import com.farmy.project.farmy.project.model.repository.RamRepo;
 import lombok.RequiredArgsConstructor;
@@ -39,7 +40,8 @@ public class ImplRamService implements IRamService {
         ram.setNum(ramDto.getNum());
         ram.setAge(ramDto.getAge());
         ram.setWeight(ramDto.getWeight());
-        ram.setBirthDay(ramDto.getBirthDay());
+        ram.setBirthDate(ramDto.getBirthDate());
+        ram.setStatus(Status.valueOf(ramDto.getStatus()));
 
         if (ramDto.getGender() == null) {
             ram.setGender(Gender.MALE);
@@ -69,19 +71,20 @@ public class ImplRamService implements IRamService {
             Ram ram = existingRam.get();
 
             ram.setNum(ramDto.getNum());
-            ram.setAge(ramDto.getAge());
-            ram.setBirthDay(ramDto.getBirthDay());
+            ram.setBirthDate(ramDto.getBirthDate());
             ram.setWeight(ramDto.getWeight());
             ram.setGender(Gender.MALE);
+            ram.setStatus(Status.valueOf(ramDto.getStatus()));
 
             Ram updatedRam = ramRepo.save(ram);
 
             return RamDto.builder()
                     .num(updatedRam.getNum())
                     .age(updatedRam.getAge())
-                    .birthDay(updatedRam.getBirthDay())
+                    .birthDate(updatedRam.getBirthDate())
                     .weight(updatedRam.getWeight())
                     .gender(String.valueOf(updatedRam.getGender()))
+                    .status(String.valueOf(updatedRam.getStatus()))
                     .build();
         }
 

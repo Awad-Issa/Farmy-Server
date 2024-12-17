@@ -17,9 +17,9 @@ public class EweController {
     private final ImplEweService implEweService;
 
     @PostMapping("/addNewEwe")
-    public ResponseEntity<String> addNewEwe(@Valid @RequestBody EweDto eweDto) {
+    public ResponseEntity<EweDto> addNewEwe(@Valid @RequestBody EweDto eweDto) {
         implEweService.addNewEwe(eweDto);
-        return ResponseEntity.ok("Ewe created successfully");
+        return ResponseEntity.ok(eweDto);
     }
 
 
@@ -43,6 +43,7 @@ public class EweController {
         if (eweDto == null) {
             return ResponseEntity.notFound().build();
         }
+
         return ResponseEntity.ok(eweDto);
     }
 

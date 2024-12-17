@@ -11,7 +11,10 @@ public class LambDto extends SheepDto {
 
     public LambDto() {
         setGender(getGender());
+
     }
+
+
 
 
 }
