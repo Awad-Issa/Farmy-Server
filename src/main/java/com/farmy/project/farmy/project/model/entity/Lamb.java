@@ -1,21 +1,21 @@
 package com.farmy.project.farmy.project.model.entity;
 
-import jakarta.persistence.DiscriminatorValue;
 import jakarta.persistence.Entity;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
+import lombok.experimental.SuperBuilder;
 
-@AllArgsConstructor
+
 @Data
 @Entity
-@DiscriminatorValue("LAMB")
 public class Lamb extends Sheep {
 
-
-    public Lamb(Gender gender) {
-        super(gender); // Set gender based on client input
+    public Lamb(){
+        this.setType(Type.LAMB);
     }
 
 
-
 }
+
+

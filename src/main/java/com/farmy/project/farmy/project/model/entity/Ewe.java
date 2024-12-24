@@ -1,29 +1,31 @@
 package com.farmy.project.farmy.project.model.entity;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.DiscriminatorValue;
 import jakarta.persistence.Entity;
 import jakarta.persistence.OneToMany;
 import lombok.Data;
 
+import java.util.ArrayList;
 import java.util.List;
 
 
 @Data
-@DiscriminatorValue("EWE")
 @Entity
 public class Ewe extends Sheep {
 
+
+    @OneToMany(mappedBy = "mother")
+    private List<Sheep> children = new ArrayList<>(); // List of Sheep (Lamb, Ewe, Ram)
+
     public Ewe() {
-        super(Gender.FEMALE); // Set gender to FEMALE
+        setGender(Gender.FEMALE); // Set gender to FEMALE
+        this.setType(Type.EWE);
     }
 
-//    @Column(name = "pregnancy", nullable = false)
-//    private Pregnancy PregnancyStatus;
 
-
-//    @OneToMany(mappedBy = "mother")
-//    private List<Sheep> sons;
+    public void addChild(Sheep child) {
+        child.setMother(this);
+        this.children.add(child);
+    }
 
 
 }

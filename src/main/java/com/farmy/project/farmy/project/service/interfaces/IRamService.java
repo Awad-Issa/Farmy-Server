@@ -1,5 +1,5 @@
 
-package com.farmy.project.farmy.project.service.RamService;
+package com.farmy.project.farmy.project.service.interfaces;
 
 import com.farmy.project.farmy.project.dto.RamDto;
 
@@ -11,11 +11,11 @@ public interface IRamService {
 
     void addNewRam(RamDto ram);
 
-    RamDto removeRam(long id);
+    void removeRam(long id);
 
-    RamDto editRam(long id, RamDto ramDto);
+    RamDto editRam(Long num, RamDto ramDto);
 
-    RamDto getRamById(long id);
+    RamDto getRamByNum(Long num);
 
 
 }

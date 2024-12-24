@@ -1,7 +1,6 @@
 package com.farmy.project.farmy.project.model.entity;
 
-public enum Pregnancy {
+public enum Type {
 
-    PREGNANT, REST, SHR
-
+    RAM, EWE, LAMB
 }

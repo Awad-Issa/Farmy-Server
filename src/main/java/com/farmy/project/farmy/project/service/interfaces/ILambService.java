@@ -1,4 +1,4 @@
-package com.farmy.project.farmy.project.service.LambService;
+package com.farmy.project.farmy.project.service.interfaces;
 
 import com.farmy.project.farmy.project.dto.LambDto;
 
@@ -10,10 +10,10 @@ public interface ILambService {
 
     void addNewLamb(LambDto lambDto);
 
-    LambDto removeLamb(long id);
+    void removeLamb(Long num);
 
-    LambDto editLamb(long id, LambDto lambDto);
+    LambDto editLamb(Long num, LambDto lambDto);
 
-    LambDto getLambById(long id);
+    LambDto getLambByNum(Long num);
 
 }

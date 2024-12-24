@@ -1,7 +1,7 @@
 package com.farmy.project.farmy.project.controller;
 
 import com.farmy.project.farmy.project.dto.EweDto;
-import com.farmy.project.farmy.project.service.EweService.ImplEweService;
+import com.farmy.project.farmy.project.service.EweService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -14,32 +14,29 @@ import java.util.List;
 @RestController
 public class EweController {
 
-    private final ImplEweService implEweService;
+    private final EweService eweService;
 
     @PostMapping("/addNewEwe")
     public ResponseEntity<EweDto> addNewEwe(@Valid @RequestBody EweDto eweDto) {
-        implEweService.addNewEwe(eweDto);
+        eweService.addNewEwe(eweDto);
         return ResponseEntity.ok(eweDto);
     }
 
 
     @GetMapping("/getAllEwes")
     public List<EweDto> getAllEwes() {
-        return implEweService.getAllEwes();
+        return eweService.getAllEwes();
     }
 
-    @DeleteMapping("/removeEwe/{id}")
-    public ResponseEntity<EweDto> removeEwe(@PathVariable long id) {
-        EweDto removedEwe = implEweService.removeEwe(id);
-        if (removedEwe != null) {
-            return ResponseEntity.ok(removedEwe);
-        }
-        return ResponseEntity.notFound().build();
+    @DeleteMapping("/removeEwe/{num}")
+    public ResponseEntity<EweDto> removeEwe(@PathVariable long num) {
+        eweService.removeEwe(num);
+        return ResponseEntity.ok().build();
     }
 
-    @GetMapping("/getEweById/{id}")
-    public ResponseEntity<EweDto> getEweById(@PathVariable Long id) {
-        EweDto eweDto = implEweService.getEweById(id);
+    @GetMapping("/getEweByNum/{num}")
+    public ResponseEntity<EweDto> getEweByNum(@PathVariable Long num) {
+        EweDto eweDto = eweService.getEweByNum(num);
         if (eweDto == null) {
             return ResponseEntity.notFound().build();
         }
@@ -47,10 +44,10 @@ public class EweController {
         return ResponseEntity.ok(eweDto);
     }
 
-    @PutMapping("/editEwe/{id}")
-    public ResponseEntity<EweDto> editEwe(@PathVariable("id") Long id, @RequestBody EweDto eweDto) {
+    @PatchMapping("/editEwe/{num}")
+    public ResponseEntity<EweDto> editEwe(@PathVariable("num") Long num, @RequestBody EweDto eweDto) {
 
-        EweDto updatedEwe = implEweService.editEwe(id, eweDto);
+        EweDto updatedEwe = eweService.editEwe(num, eweDto);
 
         if (updatedEwe != null) {
             return ResponseEntity.ok(updatedEwe);

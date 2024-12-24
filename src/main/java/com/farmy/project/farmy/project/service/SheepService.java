@@ -1,8 +1,9 @@
-package com.farmy.project.farmy.project.service.SheepService;
+package com.farmy.project.farmy.project.service;
 
 import com.farmy.project.farmy.project.dto.SheepDto;
 import com.farmy.project.farmy.project.model.mapper.SheepMapper;
 import com.farmy.project.farmy.project.model.repository.SheepRepo;
+import com.farmy.project.farmy.project.service.interfaces.ISheepService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -11,7 +12,7 @@ import java.util.stream.Collectors;
 
 @RequiredArgsConstructor
 @Service
-public class ImplSheepService implements ISheepService {
+public class SheepService implements ISheepService {
 
     private final SheepRepo sheepRepo;
 
@@ -22,7 +23,7 @@ public class ImplSheepService implements ISheepService {
         return sheepRepo
                 .findAll()
                 .stream()
-                .map(sheepMapper::toSheepDto)
+                .map(sheepMapper::toDto)
                 .collect(Collectors.toList());
     }
 }

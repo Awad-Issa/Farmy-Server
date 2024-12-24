@@ -1,7 +1,7 @@
 package com.farmy.project.farmy.project.controller;
 
 import com.farmy.project.farmy.project.dto.RamDto;
-import com.farmy.project.farmy.project.service.RamService.ImplRamService;
+import com.farmy.project.farmy.project.service.RamService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -15,43 +15,38 @@ import java.util.List;
 public class RamController {
 
 
-    private final ImplRamService implRamService;
+    private final RamService ramService;
 
     @PostMapping("/addNewRam")
     public ResponseEntity<String> addNewRam(@Valid @RequestBody RamDto ramDto) {
-        implRamService.addNewRam(ramDto);
+        ramService.addNewRam(ramDto);
         return ResponseEntity.ok("Ram created successfully");
     }
 
     @GetMapping("/getAllRams")
     public List<RamDto> getAllRams() {
-        return implRamService.getAllRams();
+        return ramService.getAllRams();
     }
 
-    @DeleteMapping("/removeRam/{id}")
-    public ResponseEntity<RamDto> removeRam(@PathVariable long id) {
-        RamDto removedRam = implRamService.removeRam(id);
-
-        if (removedRam != null) {
-            return ResponseEntity.ok(removedRam);
-        }
-        return ResponseEntity.notFound().build();
-
+    @DeleteMapping("/removeRam/{num}")
+    public ResponseEntity<RamDto> removeRam(@PathVariable long num) {
+        ramService.removeRam(num);
+        return ResponseEntity.ok().build();
     }
 
-    @GetMapping("/getRamById/{id}")
-    public ResponseEntity<RamDto> getRamById(@PathVariable Long id) {
-        RamDto ramDto = implRamService.getRamById(id);
+    @GetMapping("/getRamByNum/{num}")
+    public ResponseEntity<RamDto> getRamByNum(@PathVariable Long num) {
+        RamDto ramDto = ramService.getRamByNum(num);
         if (ramDto == null) {
             return ResponseEntity.notFound().build();
         }
         return ResponseEntity.ok(ramDto);
     }
 
-    @PutMapping("/editRam/{id}")
-    public ResponseEntity<RamDto> editRam(@PathVariable long id, @RequestBody RamDto ramDto) {
+    @PatchMapping("/editRam/{num}")
+    public ResponseEntity<RamDto> editRam(@PathVariable Long num, @RequestBody RamDto ramDto) {
 
-        RamDto updatedRam = implRamService.editRam(id, ramDto);
+        RamDto updatedRam = ramService.editRam(num,ramDto);
 
         if (updatedRam != null) {
             return ResponseEntity.ok(updatedRam);
