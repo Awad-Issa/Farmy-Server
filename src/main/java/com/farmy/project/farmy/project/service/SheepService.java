@@ -1,4 +1,4 @@
-package com.farmy.project.farmy.project.service.SheepService;
+package com.farmy.project.farmy.project.service;
 
 import com.farmy.project.farmy.project.dto.SheepDto;
 import com.farmy.project.farmy.project.model.mapper.SheepMapper;
@@ -11,7 +11,7 @@ import java.util.stream.Collectors;
 
 @RequiredArgsConstructor
 @Service
-public class ImplSheepService implements ISheepService {
+public class SheepService implements com.farmy.project.farmy.project.service.interfaces.SheepService {
 
     private final SheepRepo sheepRepo;
 
@@ -22,7 +22,7 @@ public class ImplSheepService implements ISheepService {
         return sheepRepo
                 .findAll()
                 .stream()
-                .map(sheepMapper::toSheepDto)
+                .map(sheepMapper::toDto)
                 .collect(Collectors.toList());
     }
 }

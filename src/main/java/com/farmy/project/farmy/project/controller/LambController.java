@@ -1,7 +1,7 @@
 package com.farmy.project.farmy.project.controller;
 
 import com.farmy.project.farmy.project.dto.LambDto;
-import com.farmy.project.farmy.project.service.LambService.ImplLambService;
+import com.farmy.project.farmy.project.service.LambService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -14,49 +14,46 @@ import java.util.List;
 @RestController
 public class LambController {
 
-    private final ImplLambService implLambService;
+    private final LambService lambService;
 
     @PostMapping("/addNewLamb")
-    public ResponseEntity<String> addNewLamb(@Valid @RequestBody LambDto lambDto) {
-        implLambService.addNewLamb(lambDto);
-        return ResponseEntity.ok("Lamb created successfully"+ " "+lambDto.getStatus());
+    public ResponseEntity<LambDto> addNewLamb(@Valid @RequestBody LambDto lambDto) {
+        lambService.addNewLamb(lambDto);
+        return ResponseEntity.ok(lambDto);
     }
 
     @GetMapping("/getAllLambs")
     public List<LambDto> getAllLambs() {
-        return implLambService.getAllLambs();
+
+        return lambService.getAllLambs();
     }
 
     @DeleteMapping("/removeLamb/{id}")
-    public ResponseEntity<LambDto> removeLamb(@PathVariable long id) {
-        LambDto removedLamb = implLambService.removeLamb(id);
-
-        if (removedLamb != null) {
-            return ResponseEntity.ok(removedLamb);
-        }
-        return ResponseEntity.notFound().build();
+    public ResponseEntity<LambDto> removeLamb(@PathVariable Long id) {
+        lambService.removeLamb(id);
+        return ResponseEntity.ok().build();
     }
 
-    @GetMapping("/getLambById/{id}")
-    public ResponseEntity<LambDto> getLambById(@PathVariable long id) {
-        LambDto lambDto = implLambService.getLambById(id);
+    @GetMapping("/getLamb/{id}")
+    public ResponseEntity<LambDto> getLambById(@PathVariable Long id) {
+        LambDto lambDto = lambService.getLambById(id);
         if (lambDto == null) {
             return ResponseEntity.notFound().build();
         }
-//        System.out.printf(lambDto.getType());
+        System.out.printf(String.valueOf(lambDto.getId()));
+//        System.out.print(lambDto.getMother().getId());
         return ResponseEntity.ok(lambDto);
     }
 
-    @PutMapping("/editLamb/{id}")
+    @PatchMapping("/editLamb/{id}")
     public ResponseEntity<LambDto> editLamb(@PathVariable Long id, @RequestBody LambDto lambDto) {
 
-        LambDto updatedLamb = implLambService.editLamb(id, lambDto);
+        LambDto updatedLamb = lambService.editLamb(id, lambDto);
 
         if (updatedLamb != null) {
             return ResponseEntity.ok(updatedLamb);
         } else {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND)
-                    .body(null);
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
         }
     }
 

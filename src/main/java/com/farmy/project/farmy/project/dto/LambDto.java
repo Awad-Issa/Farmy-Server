@@ -15,6 +15,4 @@ public class LambDto extends SheepDto {
     }
 
 
-
-
 }

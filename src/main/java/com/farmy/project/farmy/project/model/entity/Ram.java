@@ -1,20 +1,18 @@
 package com.farmy.project.farmy.project.model.entity;
 
-import jakarta.persistence.DiscriminatorValue;
+import com.farmy.project.farmy.project.model.entity.enums.Gender;
+import com.farmy.project.farmy.project.model.entity.enums.Type;
 import jakarta.persistence.Entity;
 import lombok.Data;
-import org.hibernate.annotations.Formula;
 
 @Data
 @Entity
-@DiscriminatorValue("RAM")
 public class Ram extends Sheep {
 
     public Ram() {
-        super(Gender.MALE);
+        this.setGender(Gender.MALE);
+        this.setType(Type.RAM);
     }
-    
-
 
 
 }

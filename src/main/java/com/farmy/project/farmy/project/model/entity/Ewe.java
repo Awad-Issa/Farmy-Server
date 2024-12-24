@@ -1,29 +1,38 @@
 package com.farmy.project.farmy.project.model.entity;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.DiscriminatorValue;
-import jakarta.persistence.Entity;
-import jakarta.persistence.OneToMany;
+import com.farmy.project.farmy.project.model.entity.enums.Gender;
+import com.farmy.project.farmy.project.model.entity.enums.Pregnancy;
+import com.farmy.project.farmy.project.model.entity.enums.Type;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import jakarta.persistence.*;
 import lombok.Data;
 
+import java.util.ArrayList;
 import java.util.List;
 
 
 @Data
-@DiscriminatorValue("EWE")
 @Entity
 public class Ewe extends Sheep {
 
+    @OneToMany(mappedBy = "mother")
+    @JsonManagedReference
+    private List<Sheep> children = new ArrayList<>();
+
     public Ewe() {
-        super(Gender.FEMALE); // Set gender to FEMALE
+        setGender(Gender.FEMALE);
+        this.setType(Type.EWE);
     }
 
-//    @Column(name = "pregnancy", nullable = false)
-//    private Pregnancy PregnancyStatus;
+    public void addChild(Sheep child) {
+        child.setMother(this);
+        this.children.add(child);
+    }
 
 
-//    @OneToMany(mappedBy = "mother")
-//    private List<Sheep> sons;
+    @Column(name = "pregnancy_status", nullable = false)
+    @Enumerated(EnumType.STRING)
+    private Pregnancy pregnancyStatus;
 
 
 }
