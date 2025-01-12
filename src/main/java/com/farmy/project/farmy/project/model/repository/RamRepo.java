@@ -9,4 +9,6 @@ public interface RamRepo extends JpaRepository<Ram, Long> {
 
 
     Optional<Ram> findByNum(long num);
+
+    Ram findById(Optional<Ram> ram);
 }

@@ -3,6 +3,7 @@ package com.farmy.project.farmy.project.model.entity;
 import com.farmy.project.farmy.project.model.entity.enums.Gender;
 import com.farmy.project.farmy.project.model.entity.enums.Status;
 import com.farmy.project.farmy.project.model.entity.enums.Type;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;

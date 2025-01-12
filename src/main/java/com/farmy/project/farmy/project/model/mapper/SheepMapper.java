@@ -1,31 +1,17 @@
 package com.farmy.project.farmy.project.model.mapper;
 
-import com.farmy.project.farmy.project.dto.EweDto;
-import com.farmy.project.farmy.project.dto.LambDto;
-import com.farmy.project.farmy.project.dto.RamDto;
-import com.farmy.project.farmy.project.dto.SheepDto;
-import com.farmy.project.farmy.project.model.entity.Ewe;
-import com.farmy.project.farmy.project.model.entity.Lamb;
-import com.farmy.project.farmy.project.model.entity.Ram;
-import com.farmy.project.farmy.project.model.entity.Sheep;
+import com.farmy.project.farmy.project.dto.*;
+import com.farmy.project.farmy.project.model.entity.*;
 import org.mapstruct.*;
 
 @Mapper(componentModel = "spring")
 public interface SheepMapper {
 
-    @Mapping(target = "mother", ignore = true)
-    SheepDto toDto(Sheep sheep);
-
-    default EweDto toDtoWithDepth(Sheep sheep, int depth) {
-        if (sheep == null || depth <= 0) {
-            return null;
-        }
-        SheepDto dto = toDto(sheep);
-        dto.setMother(toDtoWithDepth(sheep.getMother(), depth - 1));
-        return (EweDto) dto;
-    }
-
     Sheep toEntity(SheepDto sheepDto);
+
+    Ewe toEwe(Lamb lamb);
+
+    Ram toRam(Lamb lamb);
 
     EweDto toDto(Ewe ewe);
 
@@ -39,6 +25,22 @@ public interface SheepMapper {
 
     Sheep toEntity(LambDto lambDto);
 
+    Hormone toEntity(HormoneDto hormoneDto);
+
+    HormoneDto toDto(Hormone hormone);
+
+    Sponge toEntity(SpongeDto spongeDto);
+
+    SpongeDto toDto(SpongeDto spongeDto);
+
+    Insemination toEntity(InseminationDto inseminationDto);
+
+    InseminationDto toDto(Insemination insemination);
+
+    Pregnancy toEntity(PregnancyDto pregnancyDto);
+
+    PregnancyDto toDto(Pregnancy pregnancy);
+
     @BeanMapping(nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
     void updateRam(@MappingTarget Ram entity, RamDto dto);
 
@@ -50,5 +52,16 @@ public interface SheepMapper {
     void updateLamb(@MappingTarget Lamb entity, LambDto dto);
 
 
+    @Mapping(target = "mother", ignore = true)
+    SheepDto toDto(Sheep sheep);
+
+    default EweDto toDtoWithDepth(Sheep sheep, int depth) {
+        if (sheep == null || depth <= 0) {
+            return null;
+        }
+        SheepDto dto = toDto(sheep);
+        dto.setMother(toDtoWithDepth(sheep.getMother(), depth - 1));
+        return (EweDto) dto;
+    }
 }
 

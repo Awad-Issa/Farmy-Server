@@ -18,6 +18,7 @@ public abstract class BaseEntity {
     @Column(updatable = false, nullable = false)
     private Long id;
 
+
     @CreationTimestamp
     @Column(name = "created_at", updatable = false)
     private Date createdAt;

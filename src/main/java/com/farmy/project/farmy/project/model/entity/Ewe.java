@@ -1,8 +1,9 @@
 package com.farmy.project.farmy.project.model.entity;
 
 import com.farmy.project.farmy.project.model.entity.enums.Gender;
-import com.farmy.project.farmy.project.model.entity.enums.Pregnancy;
+import com.farmy.project.farmy.project.model.entity.enums.PregnancyStatus;
 import com.farmy.project.farmy.project.model.entity.enums.Type;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.Data;
@@ -16,8 +17,24 @@ import java.util.List;
 public class Ewe extends Sheep {
 
     @OneToMany(mappedBy = "mother")
-    @JsonManagedReference
     private List<Sheep> children = new ArrayList<>();
+
+    @Column(name = "pregnancy_status", nullable = false)
+    @Enumerated(EnumType.STRING)
+    private PregnancyStatus pregnancyStatus;
+
+    @OneToMany(mappedBy = "ewe", cascade = CascadeType.ALL)
+    private List<Pregnancy> pregnancies;
+
+    @OneToMany(cascade = CascadeType.ALL)
+    private List<Sponge> sponges;
+
+    @OneToMany(cascade = CascadeType.ALL)
+    private List<Hormone> hormones;
+
+
+    @OneToMany(mappedBy = "ewe", cascade = CascadeType.ALL)
+    private List<Insemination> insemination;
 
     public Ewe() {
         setGender(Gender.FEMALE);
@@ -29,10 +46,19 @@ public class Ewe extends Sheep {
         this.children.add(child);
     }
 
+    public void addSponge(Sponge sponge){
+        sponge.setEwe(this);
+        this.sponges.add(sponge);
+    }
 
-    @Column(name = "pregnancy_status", nullable = false)
-    @Enumerated(EnumType.STRING)
-    private Pregnancy pregnancyStatus;
+    public void addHormone(Hormone hormone){
+        hormone.setEwe(this);
+        this.hormones.add(hormone);
+    }
+    public void addInsemination(Insemination insemination){
+        insemination.setEwe(this);
+        this.insemination.add(insemination);
+    }
 
 
 }
