@@ -1,11 +1,8 @@
 package com.farmy.project.farmy.project.model.entity;
 
 import com.farmy.project.farmy.project.model.entity.enums.InseminationType;
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.PastOrPresent;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;

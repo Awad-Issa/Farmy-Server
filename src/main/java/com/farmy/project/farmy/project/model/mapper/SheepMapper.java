@@ -2,6 +2,7 @@ package com.farmy.project.farmy.project.model.mapper;
 
 import com.farmy.project.farmy.project.dto.*;
 import com.farmy.project.farmy.project.model.entity.*;
+import org.hibernate.query.BindableType;
 import org.mapstruct.*;
 
 @Mapper(componentModel = "spring")
@@ -23,7 +24,7 @@ public interface SheepMapper {
 
     LambDto toDto(Lamb lamb);
 
-    Sheep toEntity(LambDto lambDto);
+    Lamb toEntity(LambDto lambDto);
 
     Hormone toEntity(HormoneDto hormoneDto);
 
@@ -40,6 +41,10 @@ public interface SheepMapper {
     Pregnancy toEntity(PregnancyDto pregnancyDto);
 
     PregnancyDto toDto(Pregnancy pregnancy);
+
+    Birth toEntity(BirthDto birthDto);
+
+    BirthDto toDto(Birth birth);
 
     @BeanMapping(nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
     void updateRam(@MappingTarget Ram entity, RamDto dto);
